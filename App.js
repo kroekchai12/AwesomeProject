@@ -1,6 +1,12 @@
+
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Travel from './screens/week3/Travel'; 
+import BottomTab from './Navigation/BottomTab';
+import HomeStack from './Navigation/HomeStack';
+
+// import Travel from './screens/week03/Travel'; 
+// import Health from './screens/week05/Health';
 // import Ex01 from './screens/week02/EX01';
 // import Ex02 from './screens/week02/EX02';
 // import EX03 from './screens/week02/EX03';
@@ -14,17 +20,15 @@ import Travel from './screens/week3/Travel';
 // import EX11 from './screens/week02/EX11';
 // import EX12 from './screens/week02/EX12';
 
+
 export default function App() {
   return (
-    <Travel />
-  );
+    // <Home />
+    <NavigationContainer>
+      <BottomTab />
+    </NavigationContainer>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
