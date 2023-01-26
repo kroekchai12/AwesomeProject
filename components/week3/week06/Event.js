@@ -1,63 +1,53 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { Dimensions, FlatList, Image, ScrollView, Text, View } from "react-native";
-import TourItem from "./TourItem";
+import { FlatList, Image, Text, View } from "react-native";
 
 export default function Event(props) {
-
-    const [onlineTours, setOnlineTours] = useState([]);
-    const loadOnlineTours = async () => {
+    const [onlineEvent, setOnlineEvent] = useState([]);
+    const loadOnlineEvent = async () => {
         try {
             let promise = await fetch('https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/json/events.json');
             let data = await promise.json();
-            // console.log("Load Data : ", data);
+            console.log("Load Data : ", data);
             //SET STATE
-            setOnlineTours(data);
+            setOnlineEvent(data);
         } catch (error) {
             console.log("ERROR : ", error);
         }
     }
-
     useEffect(() => {
-        loadOnlineTours();
+        loadOnlineEvent();
     }, []);
-
-
     return (
         <View style={props.style}>
-            <Text style={{ fontSize: 20 }}>Upcoming Events</Text>
-            <Text style={{ color: 'gray', marginVertical: 5 }}>What's the Worst that could Happend</Text>
-            <FlatList
-                horizontal={true}
-                // horizontal={false}
-                // numColumns={2}
-                // columnWrapperStyle={{ justifyContent: 'space-between' }}
-                // data={tours}
-                data={onlineTours}
-                renderItem={
-                    ({ item, index }) => {
-                        // console.log(item);
-                        return (
-                            <View style={{ marginRight: 10 }} >
-                                <Image style={{ width: Dimensions.get("screen").width / 1.8, height: 150, borderTopLeftRadius : 10, borderTopRightRadius : 10 }} source={{ uri: item.uri }} />
-                                <View style={{ flexDirection : "row", backgroundColor : 'white', borderWidth : 1 , borderColor : "grey" , borderBottomLeftRadius : 10 , borderBottomRightRadius : 10}}>
-                                    <View style={{ padding : 10  }} >
-                                        <Text style={{ fontSize: 15, color: 'red', textAlign : "center" }}>{item.month}</Text>
-                                        <Text style={{ fontSize: 15, color: 'gray',  textAlign : "center" }}>{item.date}</Text>
-                                    </View>
-                                    <View style={{ padding : 10  }} >
-                                        <Text style={{ fontSize: 15, color: 'black' }}>{item.title}</Text>
-                                        <Text style={{ color: 'gray' }}>{item.datetime}</Text>
-                                        <Text style={{ color: 'gray' }}>{item.place}</Text>
-                                    </View>
-                                </View>
-                            </View>
-                            // <TourItem item={item} index={index} />
-                        );
-                    }
+            <Text style={{ fontSize: 20 }}>Upcoming Event</Text>
+            <Text style={{ color: "gray", marginVertical: 10 }}> What's the Worst that Could Happend</Text>
+         <FlatList
+              horizontal={true}
+              data={onlineEvent}
+              renderItem={
+                  ({ item, index }) => {
+                    console.log(item, index, item.uri);
+                      return (
+                          <View style={{ marginRight: 20 }}>
+                              <Image source={{ uri: item.uri }}
+                                  style={{ height: 100, width: 210, borderTopLeftRadius: 20, borderTopRightRadius: 20 }} />
+                              <View style={{ flexDirection: 'row', borderBottomLeftRadius: 15, borderBottomRightRadius: 15, borderWidth: 0.5, borderColor: "black" }}>
+                                 <View style={{ padding: 1 }}>
+                                     <Text style={{ fontSize: 15, color: 'red', textAlign: "left" }}>DEC</Text>
+                                      <Text style={{ fontSize: 10, color: 'gray', textAlign: 'center' }}>{item.date}</Text>
+                                  </View>
+                                  <View style={{ padding: 2 }}>
+                                      <Text style={{ fontSize: 15, color: 'black', }}>{item.title}</Text>
+                                      <Text style={{ color: 'gray', fontSize: 12 }}>{item.mouth}{item.date}{item.datetime}</Text>
+                                      <Text style={{ color: 'gray', fontSize: 12 }}>{item.place}</Text>
+                                  </View>
+                              </View>
+                       </View>
+                      );
                 }
-
-            />
-        </View>
-    );
+               }
+               keyExtractor={item => item.id}
+           />
+     </View>
+ );
 }
