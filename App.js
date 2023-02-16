@@ -2,8 +2,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import BottomTab from './Navigation/BottomTab';
-import HomeStack from './Navigation/HomeStack';
+// import BottomTab from './Navigation/BottomTab';
+// import HomeStack from './Navigation/HomeStack';
+import VRUUI from './screens/week12/VRUUI';
+// import Home from './screens/week6/Home';
 
 // import Travel from './screens/week03/Travel'; 
 // import Health from './screens/week05/Health';
@@ -24,9 +26,11 @@ import HomeStack from './Navigation/HomeStack';
 export default function App() {
   return (
     // <Home />
-    <NavigationContainer>
-      <BottomTab />
-    </NavigationContainer>
+    // <NavigationContainer>
+      <VRUUI />
+    // </NavigationContainer>
+    //VRUUI />
+  
   )
 }
 
